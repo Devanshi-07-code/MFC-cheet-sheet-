@@ -1,0 +1,48 @@
+# Practical-3: Cofactors, Determinant, Adjoint (Adjugate) and Inverse
+from sympy import Matrix, pprint
+
+def cofactor_matrix(M):
+    """Return cofactor matrix of square sympy Matrix M."""
+    n = M.rows
+    C = [[None]*n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            # build minor matrix by excluding row i and column j
+            minor = Matrix([[M[r, c] for c in range(n) if c != j]
+                             for r in range(n) if r != i])
+            minor_det = minor.det()
+            C[i][j] = (-1)**(i + j) * minor_det
+    return Matrix(C)
+
+# ---- Example matrix (change values as needed) ----
+A = Matrix([
+    [2,  1,  3],
+    [0, -1,  4],
+    [5,  2,  0]
+])
+
+print("Original matrix A:")
+pprint(A)
+
+# Determinant
+detA = A.det()
+print("\nDeterminant of A =", detA)
+
+# Cofactor matrix
+C = cofactor_matrix(A)
+print("\nCofactor matrix (C):")
+pprint(C)
+
+# Adjoint / Adjugate (transpose of cofactor matrix)
+adjA = C.T
+print("\nAdjoint (Adjugate) of A (adj(A)):")
+pprint(adjA)
+
+# Inverse if possible
+if detA == 0:
+    print("\nMatrix is singular (determinant = 0). Inverse does NOT exist.")
+else:
+    A_inv = (1/detA) * adjA   # exact rational result when entries are integers
+    print("\nInverse of A (A^-1):")
+    # Sympy's simplify/ Rational is automatic; pprint prints exact fractions
+    pprint(A_inv)
