@@ -1,0 +1,21 @@
+from sympy import Matrix
+
+# Create the matrix
+A = Matrix([
+    [1, 2, 3],
+    [2, 4, 6],
+    [1, 1, 1]
+])
+
+# Echelon form
+echelon_A = A.echelon_form()
+
+print("Original Matrix:")
+print(A)
+
+print("\nEchelon Form:")
+print(echelon_A)
+
+# Rank of matrix
+rank_A = A.rank()
+print("\nRank of A:", rank_A)
