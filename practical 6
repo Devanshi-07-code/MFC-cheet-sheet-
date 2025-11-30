@@ -1,0 +1,39 @@
+from sympy import Matrix
+
+# ---- Replace this matrix with YOUR matrix ----
+A = Matrix([
+    [1, 2, 3, 2],
+    [2, 4, 6, 4],
+    [1, 1, 2, 1]
+])
+
+# ---- Bases of all 4 spaces ----
+
+# 1. Column Space
+col_basis = A.columnspace()
+
+# 2. Row Space
+row_basis = A.rowspace()
+
+# 3. Null Space
+null_basis = A.nullspace()
+
+# 4. Left Null Space = Null space of A^T
+left_null_basis = A.T.nullspace()
+
+# ---- Print results ----
+print("Column Space Basis:")
+for v in col_basis:
+    print(v)
+
+print("\nRow Space Basis:")
+for v in row_basis:
+    print(v)
+
+print("\nNull Space Basis:")
+for v in null_basis:
+    print(v)
+
+print("\nLeft Null Space Basis:")
+for v in left_null_basis:
+    print(v)
